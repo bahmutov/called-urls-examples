@@ -1,8 +1,9 @@
 {
-  "name": "todo-ai-example",
+  "name": "called-urls-examples",
   "version": "1.0.0",
-  "description": "Examples of web development and testing using AI tools",
+  "description": "Cypress tests that collect all API called during the tests",
   "main": "index.js",
+  "private": true,
   "scripts": {
     "test": "cypress run",
     "cy:open": "cypress open"

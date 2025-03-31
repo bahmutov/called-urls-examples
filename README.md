@@ -1,3 +1,3 @@
-# todo-ai-example
+# called-urls-examples
 
-> Examples of web development and testing using AI tools
+> Cypress tests that collect all API called during the tests

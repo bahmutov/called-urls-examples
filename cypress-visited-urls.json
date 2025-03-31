@@ -1,0 +1,87 @@
+{
+  "cypress/e2e/complete-todo.cy.js": {
+    "Todo app / completes a todo": {
+      "urls": [
+        {
+          "url": "/app/index.html",
+          "duration": 2212,
+          "commandsCount": 12
+        }
+      ],
+      "testEvents": [
+        {
+          "label": "API",
+          "data": {
+            "method": "GET",
+            "pathname": "/todos"
+          },
+          "count": 1
+        },
+        {
+          "label": "API",
+          "data": {
+            "method": "PATCH",
+            "pathname": "/todos/1"
+          },
+          "count": 1
+        },
+        {
+          "label": "API",
+          "data": {
+            "method": "DELETE",
+            "pathname": "/todos/1"
+          },
+          "count": 1
+        }
+      ]
+    }
+  },
+  "cypress/e2e/zero-todos.cy.js": {
+    "Todo app / adds a todo": {
+      "urls": [
+        {
+          "url": "/app/index.html",
+          "duration": 4342,
+          "commandsCount": 8
+        }
+      ],
+      "testEvents": [
+        {
+          "label": "API",
+          "data": {
+            "method": "GET",
+            "pathname": "/todos"
+          },
+          "count": 2
+        },
+        {
+          "label": "API",
+          "data": {
+            "method": "POST",
+            "pathname": "/todos"
+          },
+          "count": 1
+        }
+      ]
+    },
+    "Todo app / shows no todos": {
+      "urls": [
+        {
+          "url": "/app/index.html",
+          "duration": 2055,
+          "commandsCount": 3
+        }
+      ],
+      "testEvents": [
+        {
+          "label": "API",
+          "data": {
+            "method": "GET",
+            "pathname": "/todos"
+          },
+          "count": 1
+        }
+      ]
+    }
+  }
+}

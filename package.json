@@ -13,6 +13,7 @@
   "devDependencies": {
     "cypress": "^14.2.1",
     "cypress-rest-easy": "^1.6.0",
+    "cypress-visited-urls": "^2.1.0",
     "prettier": "^3.5.3",
     "start-server-and-test": "^2.0.11"
   }

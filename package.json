@@ -1,0 +1,19 @@
+{
+  "name": "todo-ai-example",
+  "version": "1.0.0",
+  "description": "Examples of web development and testing using AI tools",
+  "main": "index.js",
+  "scripts": {
+    "test": "cypress run",
+    "cy:open": "cypress open"
+  },
+  "keywords": [],
+  "author": "Gleb Bahmutov <gleb.bahmutov@gmail.com>",
+  "license": "ISC",
+  "devDependencies": {
+    "cypress": "^14.2.1",
+    "cypress-rest-easy": "^1.6.0",
+    "prettier": "^3.5.3",
+    "start-server-and-test": "^2.0.11"
+  }
+}

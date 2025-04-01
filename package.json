@@ -12,10 +12,12 @@
   "author": "Gleb Bahmutov <gleb.bahmutov@gmail.com>",
   "license": "ISC",
   "devDependencies": {
+    "arg": "^5.0.2",
     "cypress": "^14.2.1",
     "cypress-plugin-steps": "^1.2.0",
     "cypress-rest-easy": "^1.6.0",
     "cypress-visited-urls": "^2.1.0",
+    "debug": "^4.4.0",
     "prettier": "^3.5.3",
     "start-server-and-test": "^2.0.11"
   }

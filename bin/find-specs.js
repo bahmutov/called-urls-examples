@@ -2,6 +2,7 @@
 
 // @ts-check
 
+const debug = require('debug')('called-urls-examples')
 const core = require('@actions/core')
 const arg = require('arg')
 const args = arg({
@@ -9,14 +10,17 @@ const args = arg({
   '--path': String,
   // output a list of specs or a table
   '--output': String,
-  '--set-gha-outputs': Boolean,
+  // name of the GHA output, like "foundSpecs"
+  '--set-gha-outputs': String,
 })
+debug('args', args)
 
 // HTTP method is case-insensitive
 const method = (args['--method'] || '*').toUpperCase()
 // Path is case-sensitive
 const path = args['--path'] || '*'
 const outputFormat = args['--output'] || 'list'
+debug({ method, path, outputFormat })
 
 const matches = (eventData) => {
   if (method !== '*' && eventData.method !== method) {
@@ -41,11 +45,19 @@ Object.entries(visitedUrls).forEach(([specFilename, testData]) => {
       .filter((event) => event.label === 'API')
       .forEach((event) => {
         if (matches(event.data)) {
+          debug('Found match', event.data)
           const eventCount = event.count || 1
           if (!summed[specFilename]) {
             summed[specFilename] = { count: eventCount }
+            debug('first match', specFilename, event.data)
+          } else {
+            debug(
+              'adding match count %d to the existing count %d',
+              eventCount,
+              summed[specFilename].count,
+            )
+            summed[specFilename].count += eventCount
           }
-          summed[specFilename].count += eventCount
         }
       })
   })
@@ -70,9 +82,8 @@ if (outputFormat === 'list') {
 }
 
 if (args['--set-gha-outputs']) {
-  core.setOutput('foundSpecsN', sorted.length)
-  core.setOutput(
-    'foundSpecs',
-    sorted.map((s) => s.specFilename).join(','),
-  )
+  const outputName = args['--set-gha-outputs']
+  const names = sorted.map((s) => s.specFilename).join(',')
+  core.setOutput(outputName + 'N', sorted.length)
+  core.setOutput(outputName, names)
 }

@@ -2,13 +2,14 @@
 
 // @ts-check
 
-const debug = require('debug')('called-urls-examples')
+const core = require('@actions/core')
 const arg = require('arg')
 const args = arg({
   '--method': String,
   '--path': String,
   // output a list of specs or a table
   '--output': String,
+  '--set-gha-outputs': Boolean,
 })
 
 // HTTP method is case-insensitive
@@ -66,4 +67,12 @@ if (outputFormat === 'list') {
   } else {
     console.log('No matching events found.')
   }
+}
+
+if (args['--set-gha-outputs']) {
+  core.setOutput('foundSpecsN', sorted.length)
+  core.setOutput(
+    'foundSpecs',
+    sorted.map((s) => s.specFilename).join(','),
+  )
 }

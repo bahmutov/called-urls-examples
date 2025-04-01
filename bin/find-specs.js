@@ -7,12 +7,15 @@ const arg = require('arg')
 const args = arg({
   '--method': String,
   '--path': String,
+  // output a list of specs or a table
+  '--output': String,
 })
 
 // HTTP method is case-insensitive
 const method = (args['--method'] || '*').toUpperCase()
 // Path is case-sensitive
 const path = args['--path'] || '*'
+const outputFormat = args['--output'] || 'list'
 
 const matches = (eventData) => {
   if (method !== '*' && eventData.method !== method) {
@@ -30,7 +33,7 @@ const visitedUrls = require('../cypress-visited-urls.json')
 const summed = {}
 
 Object.entries(visitedUrls).forEach(([specFilename, testData]) => {
-  console.log(specFilename)
+  // console.log(specFilename)
   Object.entries(testData).forEach(([testName, test]) => {
     const testEvents = test.testEvents
     testEvents
@@ -55,8 +58,12 @@ const sorted = Object.entries(summed)
     return { specFilename, ...data }
   })
 
-if (sorted.length) {
-  console.table(sorted)
-} else {
-  console.log('No matching events found.')
+if (outputFormat === 'list') {
+  console.log(sorted.map((s) => s.specFilename).join(','))
+} else if (outputFormat === 'table') {
+  if (sorted.length) {
+    console.table(sorted)
+  } else {
+    console.log('No matching events found.')
+  }
 }

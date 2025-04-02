@@ -6,12 +6,15 @@ const debug = require('debug')('called-urls-examples')
 const core = require('@actions/core')
 const arg = require('arg')
 const args = arg({
+  // HTTP method name, case insensitive like "GET"
   '--method': String,
+  // pathname, case sensitive like "/todos/:id"
   '--path': String,
-  // output a list of specs or a table
+  // output a list of specs or a table, list is the default
   '--output': String,
   // name of the GHA output, like "foundSpecs"
   '--set-gha-outputs': String,
+  // limit the number of results, default is Infinity
   '--max': Number,
 })
 debug('args', args)
@@ -38,6 +41,7 @@ const matches = (eventData) => {
 
 const visitedUrls = require('../cypress-visited-urls.json')
 const summed = {}
+debug('found info on %d specs', Object.keys(visitedUrls).length)
 
 Object.entries(visitedUrls).forEach(([specFilename, testData]) => {
   // console.log(specFilename)
@@ -73,6 +77,8 @@ const sorted = Object.entries(summed)
     return { specFilename, ...data }
   })
   .slice(0, max)
+debug('found %d specs', sorted.length)
+debug(sorted)
 
 if (outputFormat === 'list') {
   console.log(sorted.map((s) => s.specFilename).join(','))
@@ -86,6 +92,7 @@ if (outputFormat === 'list') {
 
 if (args['--set-gha-outputs']) {
   const outputName = args['--set-gha-outputs']
+  debug('setting GHA outputs under name %s', outputName)
   const names = sorted.map((s) => s.specFilename).join(',')
   core.setOutput(outputName + 'N', sorted.length)
   core.setOutput(outputName, names)

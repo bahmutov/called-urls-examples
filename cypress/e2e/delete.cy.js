@@ -3,6 +3,7 @@
 describe(
   'Todo app',
   {
+    // start with 4 todos right away
     rest: {
       todos: 'todos.json',
     },

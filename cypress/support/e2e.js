@@ -6,6 +6,9 @@ import { configureVisitedUrls } from 'cypress-visited-urls'
 
 import 'cypress-plugin-steps'
 
+// https://github.com/bahmutov/cypress-code-coverage
+import '@bahmutov/cypress-code-coverage/support'
+
 configureVisitedUrls()
 
 beforeEach(function () {

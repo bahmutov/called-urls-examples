@@ -41,8 +41,8 @@
       "urls": [
         {
           "url": "/app/index.html",
-          "duration": 256,
-          "commandsCount": 15
+          "duration": 392,
+          "commandsCount": 29
         }
       ],
       "testEvents": [
@@ -60,7 +60,7 @@
             "method": "DELETE",
             "pathname": "/todos/:id"
           },
-          "count": 2
+          "count": 4
         }
       ]
     }

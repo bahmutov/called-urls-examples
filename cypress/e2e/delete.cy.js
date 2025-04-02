@@ -23,6 +23,16 @@ describe(
       cy.step('Delete the last todo')
       cy.get('li.todo').last().find('.destroy').invoke('show').click()
       cy.get('li.todo').should('have.length', 2)
+
+      cy.step('Delete two more todos')
+      cy.get('li.todo')
+        .first()
+        .find('.destroy')
+        .invoke('show')
+        .click()
+      cy.get('li.todo').should('have.length', 1)
+      cy.get('li.todo').last().find('.destroy').invoke('show').click()
+      cy.get('.no-todos').should('be.visible')
     })
   },
 )

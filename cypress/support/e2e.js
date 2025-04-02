@@ -9,23 +9,27 @@ import 'cypress-plugin-steps'
 configureVisitedUrls()
 
 beforeEach(function () {
+  // this method comes from the plugin
+  // https://github.com/bahmutov/cypress-visited-urls
   if (Cypress.addVisitedTestEvent) {
     cy.intercept(
       {
         resourceType: 'xhr',
       },
       (req) => {
+        const method = req.method
         const parsed = new URL(req.url)
 
         let pathname = parsed.pathname
+        // remove the random part of the pathname
         if (/\/todos\/\d+/.test(pathname)) {
           pathname = '/todos/:id'
         }
-        console.log('intercepted', req.method, pathname)
+        console.log('intercepted', method, pathname)
 
         Cypress.addVisitedTestEvent({
           label: 'API',
-          data: { method: req.method, pathname },
+          data: { method, pathname },
         })
       },
     )

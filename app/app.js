@@ -102,15 +102,6 @@ function appStart() {
           commit('ADD_TODO', todo)
         })
       },
-      addEntireTodo({ commit }, todoFields) {
-        const todo = {
-          ...todoFields,
-          id: randomId(),
-        }
-        axios.post('/todos', todo).then(() => {
-          commit('ADD_TODO', todo)
-        })
-      },
       removeTodo({ commit }, todo) {
         axios.delete(`/todos/${todo.id}`).then(() => {
           commit('REMOVE_TODO', todo)
@@ -206,7 +197,8 @@ function appStart() {
       addTodo(e) {
         // do not allow adding empty todos
         if (!e.target.value.trim()) {
-          throw new Error('Cannot add a blank todo')
+          console.error('Cannot add a blank todo')
+          return
         }
         e.target.value = ''
         this.$store.dispatch('addTodo')
@@ -215,11 +207,6 @@ function appStart() {
 
       removeTodo(todo) {
         this.$store.dispatch('removeTodo', todo)
-      },
-
-      // utility method for create a todo with title and completed state
-      addEntireTodo(title, completed = false) {
-        this.$store.dispatch('addEntireTodo', { title, completed })
       },
 
       removeCompleted() {

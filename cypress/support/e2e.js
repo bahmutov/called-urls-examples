@@ -16,10 +16,16 @@ beforeEach(function () {
       },
       (req) => {
         const parsed = new URL(req.url)
-        console.log('intercepted', req.method, parsed.pathname)
+
+        let pathname = parsed.pathname
+        if (/\/todos\/\d+/.test(pathname)) {
+          pathname = '/todos/:id'
+        }
+        console.log('intercepted', req.method, pathname)
+
         Cypress.addVisitedTestEvent({
           label: 'API',
-          data: { method: req.method, pathname: parsed.pathname },
+          data: { method: req.method, pathname },
         })
       },
     )

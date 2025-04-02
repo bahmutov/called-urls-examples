@@ -11,6 +11,7 @@ describe('Todo app', { rest: { todos: [] } }, () => {
   })
 
   it('adds a todo', () => {
+    cy.step('Add a todo')
     cy.get('.new-todo').type('Buy milk{enter}')
     cy.get('li.todo').should('have.length', 1)
     cy.step('Reload the page')

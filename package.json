@@ -6,7 +6,9 @@
   "private": true,
   "scripts": {
     "test": "cypress run",
-    "cy:open": "cypress open"
+    "cy:open": "cypress open",
+    "find-delete": "node bin/find-specs.js --method DELETE --path /todos/:id",
+    "find-delete-top": "node bin/find-specs.js --method DELETE --path /todos/:id --max 1"
   },
   "keywords": [],
   "author": "Gleb Bahmutov <gleb.bahmutov@gmail.com>",
@@ -17,7 +19,7 @@
     "cypress": "^14.2.1",
     "cypress-plugin-steps": "^1.2.0",
     "cypress-rest-easy": "^1.6.0",
-    "cypress-visited-urls": "^2.1.1",
+    "cypress-visited-urls": "2.1.5",
     "debug": "^4.4.0",
     "prettier": "^3.5.3",
     "start-server-and-test": "^2.0.11"

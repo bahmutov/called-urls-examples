@@ -4,8 +4,8 @@
       "urls": [
         {
           "url": "/app/index.html",
-          "duration": 2212,
-          "commandsCount": 12
+          "duration": 280,
+          "commandsCount": 13
         }
       ],
       "testEvents": [
@@ -21,7 +21,7 @@
           "label": "API",
           "data": {
             "method": "PATCH",
-            "pathname": "/todos/1"
+            "pathname": "/todos/:id"
           },
           "count": 1
         },
@@ -29,9 +29,38 @@
           "label": "API",
           "data": {
             "method": "DELETE",
-            "pathname": "/todos/1"
+            "pathname": "/todos/:id"
           },
           "count": 1
+        }
+      ]
+    }
+  },
+  "cypress/e2e/delete.cy.js": {
+    "Todo app / deletes two todos": {
+      "urls": [
+        {
+          "url": "/app/index.html",
+          "duration": 256,
+          "commandsCount": 15
+        }
+      ],
+      "testEvents": [
+        {
+          "label": "API",
+          "data": {
+            "method": "GET",
+            "pathname": "/todos"
+          },
+          "count": 1
+        },
+        {
+          "label": "API",
+          "data": {
+            "method": "DELETE",
+            "pathname": "/todos/:id"
+          },
+          "count": 2
         }
       ]
     }
@@ -41,7 +70,7 @@
       "urls": [
         {
           "url": "/app/index.html",
-          "duration": 4342,
+          "duration": 325,
           "commandsCount": 8
         }
       ],
@@ -68,7 +97,7 @@
       "urls": [
         {
           "url": "/app/index.html",
-          "duration": 2055,
+          "duration": 90,
           "commandsCount": 3
         }
       ],

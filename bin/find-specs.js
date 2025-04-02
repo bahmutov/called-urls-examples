@@ -12,6 +12,7 @@ const args = arg({
   '--output': String,
   // name of the GHA output, like "foundSpecs"
   '--set-gha-outputs': String,
+  '--max': Number,
 })
 debug('args', args)
 
@@ -20,7 +21,8 @@ const method = (args['--method'] || '*').toUpperCase()
 // Path is case-sensitive
 const path = args['--path'] || '*'
 const outputFormat = args['--output'] || 'list'
-debug({ method, path, outputFormat })
+const max = args['--max'] || Infinity
+debug({ method, path, outputFormat, max })
 
 const matches = (eventData) => {
   if (method !== '*' && eventData.method !== method) {
@@ -70,6 +72,7 @@ const sorted = Object.entries(summed)
   .map(([specFilename, data]) => {
     return { specFilename, ...data }
   })
+  .slice(0, max)
 
 if (outputFormat === 'list') {
   console.log(sorted.map((s) => s.specFilename).join(','))

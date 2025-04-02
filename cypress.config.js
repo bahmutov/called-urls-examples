@@ -14,9 +14,16 @@ module.exports = defineConfig({
         collect: true,
         urlsFilename: 'cypress-visited-urls.json',
       },
+      coverage: {
+        instrument: '**/app/*.js',
+      },
     },
     setupNodeEvents(on, config) {
       visitedUrlsPlugin(on, config)
+
+      // https://github.com/bahmutov/cypress-code-coverage
+      require('@bahmutov/cypress-code-coverage/plugin')(on, config)
+
       // IMPORTANT to return the config object
       // with the any changed environment variables
       return config

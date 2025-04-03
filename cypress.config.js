@@ -21,6 +21,7 @@ module.exports = defineConfig({
       coverage: {
         instrument: '**/app/*.js',
       },
+      specCovers: false,
     },
     setupNodeEvents(on, config) {
       visitedUrlsPlugin(on, config)
